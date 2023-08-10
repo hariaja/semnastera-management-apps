@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "spatie/laravel-permission": "^5.10",
+        "yajra/laravel-datatables": "^10.1",
         "yaza/laravel-repository-service": "^4.0"
     },
     "require-dev": {
