@@ -2,7 +2,7 @@
 
 namespace App\Helpers\Global;
 
-class Helpers
+class Helper
 {
-  // 
+  public const DEFAULT_PASSWORD = 'password';
 }

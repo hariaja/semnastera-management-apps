@@ -2,9 +2,10 @@
 
 namespace App\Services\User;
 
+use Illuminate\Http\Request;
 use LaravelEasyRepository\BaseService;
 
-interface UserService extends BaseService{
-
-    // Write something awesome :)
+interface UserService extends BaseService
+{
+  public function createNewParticipant(Request $request);
 }

@@ -186,6 +186,8 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'Helper' => App\Helpers\Global\Helper::class,
+        'GenderType' => App\Helpers\Enum\GenderType::class,
     ])->toArray(),
 
 ];

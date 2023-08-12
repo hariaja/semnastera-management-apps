@@ -4,7 +4,7 @@ namespace App\Repositories\Role;
 
 use LaravelEasyRepository\Repository;
 
-interface RoleRepository extends Repository{
-
-    // Write something awesome :)
+interface RoleRepository extends Repository
+{
+  public function selectRoleWhereIn(array $name = []);
 }
