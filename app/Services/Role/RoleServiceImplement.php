@@ -24,15 +24,8 @@ class RoleServiceImplement extends Service implements RoleService
 
   public function selectRoleWhereIn(array $name = [])
   {
-    DB::beginTransaction();
-    try {
-      $return = $this->mainRepository->selectRoleWhereIn($name);
-    } catch (Exception $e) {
-      DB::rollBack();
-      Log::info($e->getMessage());
-      throw new InvalidArgumentException(trans('session.log.error'));
-    }
-    DB::commit();
-    return $return;
+    return DB::transaction(function () use ($name) {
+      return $this->mainRepository->selectRoleWhereIn($name);
+    });
   }
 }
