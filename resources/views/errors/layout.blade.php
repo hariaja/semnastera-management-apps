@@ -1,53 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-        <title>@yield('title')</title>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+    <title>@yield('title') | {{ config('app.name') }}</title>
 
-            .full-height {
-                height: 100vh;
-            }
+    <!-- Icons -->
+    <link rel="shortcut icon" href="{{ asset('assets/images/polikami.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/images/polikami.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/polikami.png') }}">
+    <!-- END Icons -->
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ asset('assets/src/css/oneui.min.css') }}" id="css-main">
+    <!-- END Stylesheets -->
 
-            .position-ref {
-                position: relative;
-            }
+    @vite([])
+  </head>
 
-            .content {
-                text-align: center;
-            }
+  <body>
+    <!-- Page Container -->
+    <div id="page-container">
 
-            .title {
-                font-size: 36px;
-                padding: 20px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            <div class="content">
-                <div class="title">
-                    @yield('message')
-                </div>
+      <!-- Main Container -->
+      <main id="main-container">
+        <!-- Page Content -->
+        <div class="hero">
+          <div class="hero-inner text-center">
+            <div class="bg-body-extra-light">
+              @yield('content')
             </div>
+            <div class="content content-full text-muted fs-sm fw-medium">
+              <!-- Error Footer -->
+              <p class="mb-1">
+                {{ trans('Apakah Anda ingin memberi tahu kami tentang hal itu?') }}
+              </p>
+              <a class="link-fx" href="https://api.whatsapp.com/send?phone={{ Helper::ADMIN_CONTACT }}">{{ trans('Laporkan') }}</a> {{ trans('atau') }} <a class="link-fx" href="{{ route('home') }}">{{ trans('Kembali ke Beranda') }}</a>
+              <!-- END Error Footer -->
+            </div>
+          </div>
         </div>
-    </body>
+        <!-- END Page Content -->
+      </main>
+      <!-- END Main Container -->
+    </div>
+    <!-- END Page Container -->
+
+    <!-- JS -->
+    <script src="{{ asset('assets/custom/js/custom.js') }}"></script>
+  </body>
 </html>

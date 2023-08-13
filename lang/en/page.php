@@ -21,7 +21,7 @@ return [
   ],
 
   'overview' => [
-    'title' => 'Overview',
+    'title' => 'Beranda',
   ],
 
   'users' => [
