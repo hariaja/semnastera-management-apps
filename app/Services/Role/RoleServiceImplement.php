@@ -22,6 +22,13 @@ class RoleServiceImplement extends Service implements RoleService
     $this->mainRepository = $mainRepository;
   }
 
+  public function baseQuery()
+  {
+    return DB::transaction(function () {
+      return $this->mainRepository->baseQuery();
+    });
+  }
+
   public function selectRoleWhereIn(array $name = [])
   {
     return DB::transaction(function () use ($name) {

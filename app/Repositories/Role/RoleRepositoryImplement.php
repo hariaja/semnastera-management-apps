@@ -21,6 +21,16 @@ class RoleRepositoryImplement extends Eloquent implements RoleRepository
   }
 
   /**
+   * Get All Data Roles
+   *
+   * @return void
+   */
+  public function baseQuery()
+  {
+    return $this->model->query();
+  }
+
+  /**
    * Mengambil data role berdasarkan nama.
    */
   public function selectRoleWhereIn(array $name = [])

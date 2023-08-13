@@ -26,17 +26,19 @@ return [
 
   'users' => [
     'title' => 'Halaman Pengguna',
-    'index' => 'Tabel Data Pengguna',
+    'index' => 'Daftar Data Pengguna',
     'create' => 'Tambah Data Pengguna',
     'edit' => 'Ubah Data Pengguna',
     'show' => 'Detail Data Pengguna',
+    'delete' => 'Hapus Pengguna',
   ],
 
   'roles' => [
     'title' => 'Halaman Role & Permission',
-    'index' => 'Tabel Data Role & Permission',
-    'create' => 'Tambah Data Role & Permission',
-    'edit' => 'Ubah Data Role & Permission',
-    'show' => 'Detail Data Role & Permission',
+    'index' => 'Daftar Role & Permission',
+    'create' => 'Tambah Role & Permission',
+    'edit' => 'Ubah Role & Permission',
+    'show' => 'Detail Role & Permission',
+    'delete' => 'Hapus Role & Permission',
   ],
 ];

@@ -46,7 +46,7 @@
               <div class="input-group">
                 <input type="password" class="form-control @error('current_password') is-invalid @enderror" id="current_password" name="current_password">
                 <span class="input-group-text">
-                  <i class="far fa-eye-slash toggle-password"></i>
+                  <i class="far fa-eye-slash toggle-password" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Tampilkan Kata Sandi"></i>
                 </span>
                 @error('current_password')
                   <div class="invalid-feedback">{{ $message }}</div>
@@ -60,7 +60,7 @@
               <div class="input-group">
                 <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
                 <span class="input-group-text">
-                  <i class="far fa-eye-slash toggle-password"></i>
+                  <i class="far fa-eye-slash toggle-password" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Tampilkan Kata Sandi"></i>
                 </span>
                 @error('password')
                   <div class="invalid-feedback">{{ $message }}</div>
@@ -74,7 +74,7 @@
               <div class="input-group">
                 <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation" name="password_confirmation">
                 <span class="input-group-text">
-                  <i class="far fa-eye-slash toggle-password"></i>
+                  <i class="far fa-eye-slash toggle-password" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Tampilkan Kata Sandi"></i>
                 </span>
                 @error('password_confirmation')
                   <div class="invalid-feedback">{{ $message }}</div>

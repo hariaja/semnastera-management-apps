@@ -1,6 +1,7 @@
 <script src="{{ asset('assets/src/js/oneui.app.min.js') }}"></script>
 <script src="{{ asset('assets/src/js/lib/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/custom/js/custom.js') }}"></script>
+<script src="{{ asset('assets/custom/js/tooltip.js') }}"></script>
 
 {{-- @vite('resources/js/global/custom.js') --}}
 
