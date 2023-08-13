@@ -2,6 +2,8 @@
 <script src="{{ asset('assets/src/js/lib/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/custom/js/custom.js') }}"></script>
 
+{{-- @vite('resources/js/global/custom.js') --}}
+
 <!-- Plugin JS -->
 <script src="{{ asset('assets/src/js/plugins/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/src/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.j') }}s"></script>

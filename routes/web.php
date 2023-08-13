@@ -31,13 +31,13 @@ Route::middleware(['auth', 'permission', 'verified'])->group(function () {
     // Role management.
     Route::resource('roles', RoleController::class)->except('show');
 
-    // Management password users.
-    Route::get('users/password/{user}', [PasswordController::class, 'showChangePasswordForm'])->name('users.password');
-    Route::post('users/password', [PasswordController::class, 'store']);
-
     // User management.
     Route::patch('users/status/{user}', [UserController::class, 'status'])->name('users.status');
     Route::post('users/image/delete/{user}', [UserController::class, 'image'])->name('users.image');
     Route::resource('users', UserController::class);
   });
+
+  // Management password users.
+  Route::get('users/password/{user}', [PasswordController::class, 'showChangePasswordForm'])->name('users.password');
+  Route::post('users/password', [PasswordController::class, 'store']);
 });

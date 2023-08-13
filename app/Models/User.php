@@ -54,6 +54,14 @@ class User extends Authenticatable implements MustVerifyEmail
   ];
 
   /**
+   * Get the route key for the model.
+   */
+  public function getRouteKeyName(): string
+  {
+    return 'uuid';
+  }
+
+  /**
    * Get the user role name.
    */
   public function isRoleName(): string
