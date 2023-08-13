@@ -37,4 +37,11 @@ class RoleRepositoryImplement extends Eloquent implements RoleRepository
   {
     return $this->model->select('*')->whereIn('name', $name)->orderBy('name', 'ASC');
   }
+
+  public function storeNewRole($request)
+  {
+    return $this->model->firstOrCreate([
+      'name' => $request->name,
+    ])->syncPermissions($request->permission);
+  }
 }

@@ -35,4 +35,11 @@ class RoleServiceImplement extends Service implements RoleService
       return $this->mainRepository->selectRoleWhereIn($name);
     });
   }
+
+  public function storeNewRole($request)
+  {
+    return DB::transaction(function () use ($request) {
+      return $this->mainRepository->storeNewRole($request);
+    });
+  }
 }

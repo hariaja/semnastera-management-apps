@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Settings;
 
 use App\DataTables\Settings\RoleDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Settings\RoleRequest;
 use App\Models\Role;
 use App\Services\PermissionCategory\PermissionCategoryService;
 use App\Services\Role\RoleService;
@@ -36,15 +37,17 @@ class RoleController extends Controller
    */
   public function create()
   {
-    //
+    $permissions = $this->permissionCategoryService->with(['permissions'])->get();
+    return view('settings.roles.create', compact('permissions'));
   }
 
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(RoleRequest $request)
   {
-    //
+    $this->roleService->storeNewRole($request);
+    return redirect(route('roles.index'))->withSuccess(trans('session.create'));
   }
 
   /**
@@ -66,7 +69,7 @@ class RoleController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, Role $role)
+  public function update(RoleRequest $request, Role $role)
   {
     //
   }
@@ -76,6 +79,9 @@ class RoleController extends Controller
    */
   public function destroy(Role $role)
   {
-    //
+    $this->roleService->delete($role->id);
+    return response()->json([
+      'message' => trans('session.delete'),
+    ], 200);
   }
 }
