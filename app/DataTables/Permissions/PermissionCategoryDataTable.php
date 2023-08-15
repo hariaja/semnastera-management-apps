@@ -32,6 +32,9 @@ class PermissionCategoryDataTable extends DataTable
     // 
   }
 
+  /**
+   * Get Relation to Role Model.
+   */
   public function setRole(Role $role)
   {
     $this->role = $role;
