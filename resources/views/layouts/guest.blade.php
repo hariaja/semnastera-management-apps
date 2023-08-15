@@ -21,6 +21,7 @@
     <link rel="stylesheet" id="css-main" href="{{ asset('assets/src/css/oneui.min.css') }}">
     <!-- END Stylesheets -->
 
+    @stack('css')
     @vite([])
 
   </head>
