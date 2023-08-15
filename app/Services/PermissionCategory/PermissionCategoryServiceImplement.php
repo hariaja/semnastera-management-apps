@@ -19,6 +19,13 @@ class PermissionCategoryServiceImplement extends Service implements PermissionCa
     $this->mainRepository = $mainRepository;
   }
 
+  public function query()
+  {
+    return DB::transaction(function () {
+      return $this->mainRepository->query();
+    });
+  }
+
   public function with(array $with = [])
   {
     return DB::transaction(function () use ($with) {

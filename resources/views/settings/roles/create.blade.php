@@ -9,7 +9,7 @@
         <li class="breadcrumb-item">
           <a href="{{ route('roles.index') }}" class="btn btn-sm btn-block-option text-danger">
             <i class="fa fa-xs fa-chevron-left me-1"></i>
-            {{ trans('page.button.back') }}
+            {{ trans('button.back') }}
           </a>
         </li>
       </ol>
@@ -43,45 +43,30 @@
         </div>
       </div>
 
-      <div class="mb-4">
-        <div class="space-y-2">
-          <div class="form-check">
-            <input type="checkbox" name="all_permission" id="all_permission" class="form-check-input @error('permission') is-invalid @enderror">
-            <label for="all_permission" class="form-check-label">{{ trans('Pilih Semua Hak Akses') }}</label>
-            @error('permission')
-              <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+      <div class="row">
+        <div class="col-md-12">
+          <div class="d-flex justify-content-between">
+            <div class="space-y-2">
+              <div class="form-check">
+                <input type="checkbox" name="all_permission" id="all_permission" class="form-check-input @error('permission') is-invalid @enderror">
+                <label for="all_permission" class="form-check-label">{{ trans('Pilih Semua Hak Akses') }}</label>
+                @error('permission')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+              </div>
+            </div>
+            <span class="fw-normal">
+              {{ trans('Filter Berdasarkan Nama Kategori Izin') }}
+            </span>
           </div>
         </div>
       </div>
 
-      <div class="row">
-        @foreach ($permissions as $data)
-          <div class="col-md-6">
-            <div class="card push">
-              <div class="card-header border-bottom-0">
-                <h6 class="block-title">{{ trans('permission.' . $data->name) }}</h6>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    @foreach ($data->permissions as $item)
-                      <div class="space-y-2">
-                        <div class="form-check">
-                          <input class="permission form-check-input @error('permission') is-invalid @enderror" name="permission[{{ $item->name }}]" id="permission-{{ $item->name }}" type="checkbox" value="{{ $item->name }}">
-                          <label class="form-check-label" for="permission-{{ $item->name }}">{{ trans('permission.' . $item->name) }}</label>
-                        </div>
-                      </div>
-                    @endforeach
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        @endforeach
+      <div class="my-3">
+        {{ $dataTable->table() }}
       </div>
 
-      <div class="row justify-content-end">
+      <div class="row justify-content-center">
         <div class="col-md-6">
           <div class="mb-4">
             <button type="submit" class="btn btn-primary w-100" id="submit-button">
@@ -98,6 +83,7 @@
 </div>
 @endsection
 @push('javascript')
+{{ $dataTable->scripts() }}
 <script>
   @vite('resources/js/settings/roles/input.js')
 </script>

@@ -19,6 +19,11 @@ class PermissionCategoryRepositoryImplement extends Eloquent implements Permissi
     $this->model = $model;
   }
 
+  public function query()
+  {
+    return $this->model->query();
+  }
+
   public function with(array $with = [])
   {
     return $this->model->with($with);

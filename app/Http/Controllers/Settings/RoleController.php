@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Settings;
 
+use App\DataTables\Permissions\PermissionCategoryDataTable;
 use App\DataTables\Settings\RoleDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\RoleRequest;
@@ -35,10 +36,9 @@ class RoleController extends Controller
   /**
    * Show the form for creating a new resource.
    */
-  public function create()
+  public function create(PermissionCategoryDataTable $dataTable)
   {
-    $permissions = $this->permissionCategoryService->with(['permissions'])->get();
-    return view('settings.roles.create', compact('permissions'));
+    return $dataTable->render('settings.roles.create');
   }
 
   /**
@@ -51,19 +51,14 @@ class RoleController extends Controller
   }
 
   /**
-   * Display the specified resource.
-   */
-  public function show(Role $role)
-  {
-    //
-  }
-
-  /**
    * Show the form for editing the specified resource.
    */
-  public function edit(Role $role)
+  public function edit(Role $role, PermissionCategoryDataTable $dataTable)
   {
-    //
+    return $dataTable->setRole($role)->render('settings.roles.edit', [
+      'role' => $role,
+      'rolePermissions' => $this->roleService->roleHasPermissions($role->id),
+    ]);
   }
 
   /**
@@ -71,7 +66,8 @@ class RoleController extends Controller
    */
   public function update(RoleRequest $request, Role $role)
   {
-    //
+    $this->roleService->updateExistingRole($role->id, $request);
+    return redirect(route('roles.index'))->withSuccess(trans('session.update'));
   }
 
   /**

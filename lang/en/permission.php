@@ -10,6 +10,8 @@ return [
     'edit' => 'Tampilkan formulir untuk mengedit Pengguna yang ditentukan',
     'update' => 'Perbarui Pengguna yang ditentukan dalam penyimpanan',
     'destroy' => 'Hapus Pengguna yang ditentukan dari penyimpanan',
+    'password' => 'Mengubah Password akun login Pengguna',
+    'status' => 'Mengubah Status akun login Pengguna',
   ],
 
   'roles' => [

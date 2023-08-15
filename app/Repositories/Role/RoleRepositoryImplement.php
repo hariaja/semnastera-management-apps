@@ -25,7 +25,7 @@ class RoleRepositoryImplement extends Eloquent implements RoleRepository
    *
    * @return void
    */
-  public function baseQuery()
+  public function query()
   {
     return $this->model->query();
   }
@@ -38,10 +38,32 @@ class RoleRepositoryImplement extends Eloquent implements RoleRepository
     return $this->model->select('*')->whereIn('name', $name)->orderBy('name', 'ASC');
   }
 
+  /**
+   * Mencari data role yang memiliki permissions
+   */
+  public function roleHasPermissions($id)
+  {
+    $role = $this->findOrFail($id);
+    if ($role) :
+      return $role->permissions->pluck('name')->toArray();
+    endif;
+
+    return [];
+  }
+
   public function storeNewRole($request)
   {
     return $this->model->firstOrCreate([
       'name' => $request->name,
     ])->syncPermissions($request->permission);
+  }
+
+  public function updateExistingRole($id, $request)
+  {
+    $role = $this->findOrFail($id);
+    $role->updateOrFail([
+      'name' => $request->name,
+    ]);
+    return $role->syncPermissions($request->permission);
   }
 }

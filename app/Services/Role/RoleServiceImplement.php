@@ -22,10 +22,17 @@ class RoleServiceImplement extends Service implements RoleService
     $this->mainRepository = $mainRepository;
   }
 
-  public function baseQuery()
+  public function query()
   {
     return DB::transaction(function () {
-      return $this->mainRepository->baseQuery();
+      return $this->mainRepository->query();
+    });
+  }
+
+  public function roleHasPermissions($id)
+  {
+    return DB::transaction(function () use ($id) {
+      return $this->mainRepository->roleHasPermissions($id);
     });
   }
 
@@ -40,6 +47,13 @@ class RoleServiceImplement extends Service implements RoleService
   {
     return DB::transaction(function () use ($request) {
       return $this->mainRepository->storeNewRole($request);
+    });
+  }
+
+  public function updateExistingRole($id, $request)
+  {
+    return DB::transaction(function () use ($id, $request) {
+      return $this->mainRepository->updateExistingRole($id, $request);
     });
   }
 }
