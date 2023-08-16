@@ -2,65 +2,104 @@
 
 namespace App\Http\Controllers\Settings;
 
-use App\Http\Controllers\Controller;
+use App\DataTables\Scopes\RoleFilter;
+use App\DataTables\Scopes\StatusFilter;
+use App\DataTables\Settings\UserDataTable;
+use App\Helpers\Enum\RoleType;
+use App\Helpers\Enum\StatusUserType;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Services\Role\RoleService;
+use App\Services\User\UserService;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+  /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function __construct(
+    protected UserService $userService,
+    protected RoleService $roleService,
+  ) {
+    // 
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+  /**
+   * Display a listing of the resource.
+   */
+  public function index(UserDataTable $dataTable, Request $request)
+  {
+    $roleTypes = RoleType::toArray();
+    $statusUserTypes = StatusUserType::toArray();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    return $dataTable
+      ->addScope(new RoleFilter($request))
+      ->addScope(new StatusFilter($request))
+      ->render('settings.users.index', compact(
+        'roleTypes',
+        'statusUserTypes'
+      ));
+  }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
-    {
-        //
-    }
+  /**
+   * Show the form for creating a new resource.
+   */
+  public function create()
+  {
+    //
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
-    {
-        //
-    }
+  /**
+   * Store a newly created resource in storage.
+   */
+  public function store(Request $request)
+  {
+    //
+  }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
+  /**
+   * Display the specified resource.
+   */
+  public function show(User $user)
+  {
+    //
+  }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $user)
-    {
-        //
-    }
+  /**
+   * Show the form for editing the specified resource.
+   */
+  public function edit(User $user)
+  {
+    //
+  }
+
+  /**
+   * Update the specified resource in storage.
+   */
+  public function update(Request $request, User $user)
+  {
+    //
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   */
+  public function destroy(User $user)
+  {
+    //
+  }
+
+  /**
+   * Update the specified status account user.
+   */
+  public function status(User $user)
+  {
+    $this->userService->updateStatusAccount($user->id);
+    return response()->json([
+      'message' => trans('session.status'),
+    ]);
+  }
 }

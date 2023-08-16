@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Enum\RoleType;
 use App\Helpers\Enum\StatusUserType;
 use App\Traits\Uuid;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -78,6 +79,49 @@ class User extends Authenticatable implements MustVerifyEmail
   }
 
   /**
+   * Define badge type roles.
+   *
+   * @return string
+   */
+  public function getRoleBadge(): string
+  {
+    $roleName = $this->isRoleName();
+
+    switch ($roleName) {
+      case RoleType::ADMIN->value:
+        $badgeClass = 'badge text-smooth';
+        break;
+      case RoleType::REVIEWER->value:
+        $badgeClass = 'badge text-info';
+        break;
+      case RoleType::PEMAKALAH->value:
+        $badgeClass = 'badge text-warning';
+        break;
+      case RoleType::PARTICIPANT->value:
+        $badgeClass = 'badge text-danger';
+        break;
+      default:
+        $badgeClass = 'badge';
+        break;
+    }
+
+    return "<span class='{$badgeClass}'>{$roleName}</span>";
+  }
+
+  /**
+   * Define badge status account.
+   *
+   * @return string
+   */
+  public function getAccountStatus(): string
+  {
+    $badgeClass = ($this->status == StatusUserType::ACTIVE->value) ? 'badge text-success' : 'badge text-danger';
+    $badgeText = ($this->status == StatusUserType::ACTIVE->value) ? 'Active' : 'Inactive';
+
+    return "<span class='{$badgeClass}'>{$badgeText}</span>";
+  }
+
+  /**
    * Get the user avatar.
    *
    */
@@ -122,6 +166,24 @@ class User extends Authenticatable implements MustVerifyEmail
     return $this->inactive()->get();
   }
 
+  /**
+   * Get all user except :value
+   *
+   * @param  mixed $query
+   * @return void
+   */
+  public function scopeWhereNot($query)
+  {
+    return $query->whereDoesntHave('roles', function ($row) {
+      $row->where('name', RoleType::ADMIN->value);
+    });
+  }
+
+  /**
+   * Relation to Participant Model.
+   *
+   * @return HasOne
+   */
   public function participant(): HasOne
   {
     return $this->hasOne(Participant::class, 'user_id');

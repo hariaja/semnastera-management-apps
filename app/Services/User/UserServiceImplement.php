@@ -72,6 +72,18 @@ class UserServiceImplement extends Service implements UserService
     });
   }
 
+  /**
+   * Update Status Account User
+   *
+   * @param  mixed $id
+   * @return void
+   */
+  public function updateStatusAccount($id)
+  {
+    return DB::transaction(function () use ($id) {
+      return $this->mainRepository->updateStatusAccount($id);
+    });
+  }
 
   /**
    * Private func for get role name
