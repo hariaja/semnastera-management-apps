@@ -2,19 +2,31 @@
 
 namespace App\DataTables\Settings;
 
-use App\Helpers\Enum\RoleType;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use App\Helpers\Enum\RoleType;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use App\Services\User\UserService;
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class UserDataTable extends DataTable
 {
+  /**
+   * Create a new datatables instance.
+   *
+   * @return void
+   */
+  public function __construct(
+    protected UserService $userService,
+  ) {
+    // 
+  }
+
   /**
    * Build the DataTable class.
    *
@@ -41,7 +53,8 @@ class UserDataTable extends DataTable
    */
   public function query(User $model): QueryBuilder
   {
-    return $model->newQuery();
+    // return $model->newQuery();
+    return $this->userService->getUserNotAdmin()->oldest('name');
   }
 
   /**
@@ -100,7 +113,7 @@ class UserDataTable extends DataTable
         ->title(trans('Email'))
         ->addClass('text-center'),
       Column::make('roles')
-        ->title(trans('Peran'))
+        ->title(trans('Tipe Akun'))
         ->addClass('text-center'),
       Column::make('status')
         ->title(trans('Status'))

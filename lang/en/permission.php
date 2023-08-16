@@ -24,4 +24,15 @@ return [
     'update' => 'Perbarui Peran yang ditentukan dalam penyimpanan',
     'destroy' => 'Hapus Peran yang ditentukan dari penyimpanan',
   ],
+
+  'participants' => [
+    'name' => 'Management Pemakalah & Peserta',
+    'index' => 'Menampilkan daftar Pemakalah & Peserta',
+    'create' => 'Tampilkan formulir untuk membuat Pemakalah & Peserta baru',
+    'store' => 'Simpan Pemakalah & Peserta yang baru dibuat di penyimpanan',
+    'show' => 'Menampilkan Pemakalah & Peserta yang ditentukan (Detail)',
+    'edit' => 'Tampilkan formulir untuk mengedit Pemakalah & Peserta yang ditentukan',
+    'update' => 'Perbarui Pemakalah & Peserta yang ditentukan dalam penyimpanan',
+    'destroy' => 'Hapus Pemakalah & Peserta yang ditentukan dari penyimpanan',
+  ],
 ];

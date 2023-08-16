@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Settings\RoleController;
 use App\Http\Controllers\Settings\UserController;
 use App\Http\Controllers\Settings\PasswordController;
+use App\Http\Controllers\Settings\ParticipantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,11 @@ Route::middleware(['auth', 'permission', 'verified'])->group(function () {
     Route::patch('users/status/{user}', [UserController::class, 'status'])->name('users.status');
     Route::post('users/image/delete/{user}', [UserController::class, 'image'])->name('users.image');
     Route::resource('users', UserController::class);
+
+    // Paticipant management.
+    Route::prefix('users')->group(function () {
+      Route::resource('participants', ParticipantController::class)->except('index', 'destroy', 'show');
+    });
   });
 
   // Management password users.

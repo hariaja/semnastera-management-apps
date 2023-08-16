@@ -41,4 +41,13 @@ return [
     'show' => 'Detail Role & Permission',
     'delete' => 'Hapus Role & Permission',
   ],
+
+  'participants' => [
+    'title' => 'Halaman Pemakalah & Peserta',
+    'index' => 'Daftar Pemakalah & Peserta',
+    'create' => 'Tambah Pemakalah & Peserta',
+    'edit' => 'Ubah Pemakalah & Peserta',
+    'show' => 'Detail Pemakalah & Peserta',
+    'delete' => 'Hapus Pemakalah & Peserta',
+  ],
 ];

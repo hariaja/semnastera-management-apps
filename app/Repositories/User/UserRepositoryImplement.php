@@ -29,6 +29,29 @@ class UserRepositoryImplement extends Eloquent implements UserRepository
   }
 
   /**
+   * Get All User Where Role Not Admin
+   *
+   * @return void
+   */
+  public function getUserNotAdmin()
+  {
+    return $this->query()->select('*')->whereNotAdmin();
+  }
+
+  /**
+   * Get User by Role Name
+   *
+   * @param  mixed $role
+   * @return void
+   */
+  public function getUserByRole($role)
+  {
+    return $this->query()->select('*')->whereHas('roles', function ($row) use ($role) {
+      $row->where('name', $role);
+    })->active();
+  }
+
+  /**
    * Get All User Where Has :relation :column :condition
    *
    * @return void

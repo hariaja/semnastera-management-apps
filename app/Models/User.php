@@ -172,7 +172,7 @@ class User extends Authenticatable implements MustVerifyEmail
    * @param  mixed $query
    * @return void
    */
-  public function scopeWhereNot($query)
+  public function scopeWhereNotAdmin($query)
   {
     return $query->whereDoesntHave('roles', function ($row) {
       $row->where('name', RoleType::ADMIN->value);

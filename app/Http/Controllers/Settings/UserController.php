@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Services\Role\RoleService;
 use App\Services\User\UserService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Settings\UserRequest;
 
 class UserController extends Controller
 {
@@ -49,15 +50,20 @@ class UserController extends Controller
    */
   public function create()
   {
-    //
+    $roles = $this->roleService->selectRoleWhereIn([
+      RoleType::REVIEWER->value
+    ])->first();
+
+    return view('settings.users.create', compact('roles'));
   }
 
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(UserRequest $request)
   {
-    //
+    $this->userService->createNewReviewer($request);
+    return redirect(route('users.index'))->withSuccess(trans('session.create'));
   }
 
   /**
@@ -89,7 +95,10 @@ class UserController extends Controller
    */
   public function destroy(User $user)
   {
-    //
+    $this->userService->handleDeleteUser($user->id);
+    return response()->json([
+      'message' => trans('session.delete'),
+    ]);
   }
 
   /**

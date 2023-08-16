@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 class RoleDataTable extends DataTable
 {
   /**
-   * Create a new controller instance.
+   * Create a new datatables instance.
    *
    * @return void
    */

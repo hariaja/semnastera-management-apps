@@ -14,12 +14,12 @@
       {{ trans('page.users.index') }}
     </h3>
     <div class="block-options">
-      {{-- @canany(['users.create', 'clients.create'])
+      @canany(['users.create', 'participants.create'])
         <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modal-block-popin">
           <i class="fa fa-plus fa-xs me-1"></i>
           {{ trans('page.users.create') }}
         </button>
-      @endcan --}}
+      @endcan
     </div>
   </div>
   <div class="block-content">
@@ -55,6 +55,8 @@
 
   </div>
 </div>
+
+@includeIf('components.create-user')
 @endsection
 @push('javascript')
   {{ $dataTable->scripts() }}

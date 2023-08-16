@@ -31,6 +31,20 @@ class UserServiceImplement extends Service implements UserService
     // 
   }
 
+  public function getUserNotAdmin()
+  {
+    return DB::transaction(function () {
+      return $this->mainRepository->getUserNotAdmin();
+    });
+  }
+
+  public function getUserByRole($role)
+  {
+    return DB::transaction(function () use ($role) {
+      return $this->mainRepository->getUserByRole($role);
+    });
+  }
+
   public function createNewParticipant($request)
   {
     return DB::transaction(function () use ($request) {
@@ -73,6 +87,39 @@ class UserServiceImplement extends Service implements UserService
   }
 
   /**
+   * Handle create new reviewer or officer
+   *
+   * @param  mixed $request
+   * @return void
+   */
+  public function createNewReviewer($request)
+  {
+    return DB::transaction(function () use ($request) {
+      // Get role to find or get id role
+      $role = $this->roleRepository->selectRoleWhereIn([$request->roles])->first();
+
+      /**
+       * Jika ada avatar yang diupload maka akan digunakan sebagai avatar user
+       * Jika tidak ada, maka avatar secara otomatis bernilai null
+       */
+      $avatar = $request->file('avatar') ? Storage::putFile(
+        'public/images/' . strtolower($this->getRoleName($role->id)),
+        $request->file('avatar')
+      ) : null;
+
+      # Save data into database
+      $validation = $request->validated();
+      $validation['avatar'] = $avatar;
+      $validation['password'] = Hash::make(Helper::DEFAULT_PASSWORD);
+      $validation['status'] = StatusUserType::ACTIVE->value;
+
+      # Sync user to role
+      $user = $this->mainRepository->create($validation);
+      $user->assignRole($request->roles);
+    });
+  }
+
+  /**
    * Update Status Account User
    *
    * @param  mixed $id
@@ -86,11 +133,29 @@ class UserServiceImplement extends Service implements UserService
   }
 
   /**
+   * Delete any user in database
+   *
+   * @param  mixed $id
+   * @return void
+   */
+  public function handleDeleteUser(int $id)
+  {
+    return DB::transaction(function () use ($id) {
+      $user = $this->mainRepository->findOrFail($id);
+      if ($user->avatar) {
+        Storage::delete($user->avatar);
+      }
+
+      return $this->mainRepository->delete($user->id);
+    });
+  }
+
+  /**
    * Private func for get role name
    */
   protected function getRoleName(int $id): string
   {
     $role = $this->roleRepository->findOrFail($id);
-    return $role->name;
+    return "{$role->name}s";
   }
 }

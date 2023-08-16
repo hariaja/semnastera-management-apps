@@ -85,6 +85,7 @@ class PermissionCategoryDataTable extends DataTable
         'table-bordered',
         'table-hover',
         'table-vcenter',
+        'table-responsive',
       ])
       ->processing(true)
       ->retrieve(true)
