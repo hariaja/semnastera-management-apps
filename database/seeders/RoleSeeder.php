@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Role;
+use App\Models\Permission;
 use App\Helpers\Enum\RoleType;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\PermissionRegistrar;
@@ -29,5 +30,13 @@ class RoleSeeder extends Seeder
     endforeach;
 
     // Berikan Permission Nanti
+    $pemakalah = $roles->where('name', RoleType::PEMAKALAH->value)->first();
+    $pemakalah->syncPermissions(
+      Permission::where('name', 'LIKE', 'users.show')
+        ->orWhere('name', 'LIKE', 'users.password')
+        ->orWhere('name', 'LIKE', 'users.image')
+        ->orWhere('name', 'LIKE', 'participants.update')
+        ->get()
+    );
   }
 }

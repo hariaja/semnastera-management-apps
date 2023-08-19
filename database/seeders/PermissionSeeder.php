@@ -21,6 +21,7 @@ class PermissionSeeder extends Seeder
       // Halaman Users
       'users.index', 'users.create', 'users.store', 'users.show',
       'users.password', 'users.status', 'users.edit', 'users.update', 'users.destroy',
+      'users.image',
 
       // Halaman Role
       'roles.index', 'roles.create', 'roles.store',

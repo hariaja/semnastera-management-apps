@@ -34,7 +34,7 @@ class UserRequest extends FormRequest
         Rule::unique('users', 'phone')->ignore($this->user),
       ],
       'avatar' => 'nullable|mimes:jpg,png|max:3048',
-      'roles' => 'required|' . RoleType::toValidation(1),
+      'roles' => 'required|' . RoleType::toValidation(0, 1),
     ];
 
     return $rules;

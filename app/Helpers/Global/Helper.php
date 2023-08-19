@@ -2,6 +2,9 @@
 
 namespace App\Helpers\Global;
 
+use App\Helpers\Enum\GenderType;
+use App\Helpers\Enum\RoleType;
+use App\Models\Participant;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -37,6 +40,20 @@ class Helper
   }
 
   /**
+   * Handle delete user avatar
+   *
+   * @param  mixed $user
+   * @return void
+   */
+  public static function deleteAvatar(User $user)
+  {
+    if ($user->avatar)
+      return Storage::delete($user->avatar);
+
+    return false;
+  }
+
+  /**
    * Get role name.
    *
    * @param  mixed $roleId
@@ -46,5 +63,42 @@ class Helper
   {
     $role = Role::findOrFail($roleId);
     return $role->name;
+  }
+
+  /**
+   * Get condition for user profile view
+   *
+   * @param  mixed $roles
+   * @param  mixed $user
+   * @return void
+   */
+  public static function getProfileView($roles, User $user)
+  {
+    if (
+      $roles === RoleType::PEMAKALAH->value ||
+      $roles === RoleType::PARTICIPANT->value
+    ) {
+      $genderTypes = GenderType::toArray();
+      $participant = Participant::where('user_id', $user->id)->first();
+      return view('settings.participants.show', compact('user', 'genderTypes', 'participant'));
+    } else {
+      return view('settings.users.show', compact('user'));
+    }
+  }
+
+  /**
+   * Handle redirect page after update data user.
+   *
+   * @param  mixed $roleId
+   * @param  mixed $user
+   * @return void
+   */
+  public static function redirectUpdateUser($roleId, User $user)
+  {
+    if ($roleId == $user->isRoleId()) {
+      return redirect(route('users.show', $user->uuid))->withSuccess(trans('session.update'));
+    } else {
+      return redirect(route('users.index'))->withSuccess(trans('session.update'));
+    }
   }
 }

@@ -7,6 +7,7 @@ use App\DataTables\Scopes\StatusFilter;
 use App\DataTables\Settings\UserDataTable;
 use App\Helpers\Enum\RoleType;
 use App\Helpers\Enum\StatusUserType;
+use App\Helpers\Global\Helper;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\Role\RoleService;
@@ -71,7 +72,7 @@ class UserController extends Controller
    */
   public function show(User $user)
   {
-    //
+    return Helper::getProfileView(isRoleName(), $user);
   }
 
   /**
@@ -88,7 +89,7 @@ class UserController extends Controller
   public function update(UserRequest $request, User $user)
   {
     $this->userService->handleUpdateReviewer($request, $user->id);
-    return redirect(route('users.index'))->withSuccess(trans('session.update'));
+    return Helper::redirectUpdateUser(isRoleId(), $user);
   }
 
   /**
@@ -111,5 +112,24 @@ class UserController extends Controller
     return response()->json([
       'message' => trans('session.status'),
     ]);
+  }
+
+  /**
+   * Return delete image in storage & database.
+   */
+  public function image(User $user)
+  {
+    if (!$user->avatar) {
+      return response()->json([
+        'status' => 'warning',
+        'message' => trans('Anda tidak memiliki gambar untuk dihapus'),
+      ]);
+    } else {
+      $this->userService->handleDeleteUserAvatar($user->id);
+      return response()->json([
+        'status' => 'success',
+        'message' => trans('Berhasil menghapus gambar'),
+      ]);
+    }
   }
 }

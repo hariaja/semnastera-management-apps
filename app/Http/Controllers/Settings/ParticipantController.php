@@ -6,6 +6,7 @@ use App\Helpers\Enum\GenderType;
 use App\Models\Participant;
 use Illuminate\Http\Request;
 use App\Helpers\Enum\RoleType;
+use App\Helpers\Global\Helper;
 use App\Services\Role\RoleService;
 use App\Services\User\UserService;
 use App\Http\Controllers\Controller;
@@ -80,6 +81,6 @@ class ParticipantController extends Controller
   public function update(ParticipantRequest $request, Participant $participant)
   {
     $this->userService->handleUpdateParticipant($request, $participant->id);
-    return redirect(route('users.index'))->withSuccess(trans('session.update'));
+    return Helper::redirectUpdateUser(isRoleId(), $participant->user);
   }
 }

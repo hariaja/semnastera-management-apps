@@ -12,6 +12,7 @@ return [
     'destroy' => 'Hapus Pengguna yang ditentukan dari penyimpanan',
     'password' => 'Mengubah Password akun login Pengguna',
     'status' => 'Mengubah Status akun login Pengguna',
+    'image' => 'Menghapus Foto Profil Dirinya Sendiri',
   ],
 
   'roles' => [

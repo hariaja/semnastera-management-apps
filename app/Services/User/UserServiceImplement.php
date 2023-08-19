@@ -210,6 +210,21 @@ class UserServiceImplement extends Service implements UserService
   }
 
   /**
+   * Delete avatar from storage.
+   *
+   * @param  mixed $id
+   * @return void
+   */
+  public function handleDeleteUserAvatar($id)
+  {
+    return DB::transaction(function () use ($id) {
+      $user = $this->mainRepository->findOrFail($id);
+      Storage::delete($user->avatar);
+      return $this->mainRepository->handleDeleteUserAvatar($user->id);
+    });
+  }
+
+  /**
    * Private func for get role name
    */
   protected function getRoleName(int $id): string

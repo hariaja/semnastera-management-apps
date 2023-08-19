@@ -79,4 +79,18 @@ class UserRepositoryImplement extends Eloquent implements UserRepository
 
     return $user;
   }
+
+  /**
+   * Delete user avatar in local storage & make field null
+   *
+   * @param  mixed $id
+   * @return void
+   */
+  public function handleDeleteUserAvatar($id)
+  {
+    $user = $this->findOrFail($id);
+    return $user->updateOrFail([
+      'avatar' => NULL,
+    ]);
+  }
 }

@@ -34,9 +34,12 @@
           <div class="card">
             <div class="card-body">
 
-              <div class="mb-4">
-                <span class="h5">{{ trans('Personalia') }}</span>
-              </div>
+              <h2 class="content-heading pt-0">
+                <i class="fa fa-fw fa-user-circle me-1"></i>
+                {{ trans('Data Diri Anda') }}
+              </h2>
+
+              <hr class="">
               
               <div class="mb-3">
                 <label for="first_title" class="form-label">{{ trans('Gelar Depan') }}</label>
@@ -81,9 +84,13 @@
         <div class="col-md-6">
           <div class="card">
             <div class="card-body">
-              <div class="mb-2">
-                <span class="h5">{{ trans('Tipe Akun') }}</span>
-              </div>
+
+              <h2 class="content-heading pt-0">
+                <i class="fa fa-fw fa-lock me-1"></i>
+                {{ trans('Data Kredensial Anda') }}
+              </h2>
+
+              <hr class="">
     
               <div class="mb-4">
                 <div class="alert alert-info d-flex align-items-center" role="alert">
@@ -138,9 +145,12 @@
           <div class="row justify-content-center mb-4">
             <div class="col-md-6">
     
-              <div class="mb-4">
-                <span class="h5">{{ trans('Informasi Umum') }}</span>
-              </div>
+              <h2 class="content-heading pt-0">
+                <i class="fa fa-fw fa-globe me-1"></i>
+                {{ trans('Infomasi Umum') }}
+              </h2>
+
+              <hr class="">
     
               <div class="mb-3">
                 <label for="gender" class="form-label">{{ trans('Jenis Kelamin') }}</label>

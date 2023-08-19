@@ -11,4 +11,5 @@ interface UserRepository extends Repository
   public function getUserByRole(string $role);
   public function getQueryWhereHas(string $relation, string $column, $condition);
   public function updateStatusAccount(int $id);
+  public function handleDeleteUserAvatar(int $id);
 }
