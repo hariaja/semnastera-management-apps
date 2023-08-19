@@ -30,7 +30,14 @@
             @can('programs.index')
             <li class="nav-main-item">
               <a class="nav-main-link {{ Request::is('activities/programs*') ? 'active' : '' }}" href="{{ route('programs.index') }}">
-                <span class="nav-main-link-name">{{ trans('Kegiatan') }}</span>
+                <span class="nav-main-link-name">{{ trans('page.programs.title') }}</span>
+              </a>
+            </li>
+            @endcan
+            @can('schedules.index')
+            <li class="nav-main-item">
+              <a class="nav-main-link {{ Request::is('activities/schedules*') ? 'active' : '' }}" href="{{ route('schedules.index') }}">
+                <span class="nav-main-link-name">{{ trans('page.schedules.title') }}</span>
               </a>
             </li>
             @endcan
@@ -49,14 +56,14 @@
             @can('users.index')
               <li class="nav-main-item">
                 <a class="nav-main-link {{ Request::is('settings/users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
-                  <span class="nav-main-link-name">{{ trans('Pengguna') }}</span>
+                  <span class="nav-main-link-name">{{ trans('page.users.title') }}</span>
                 </a>
               </li>
             @endcan
             @can('roles.index')
             <li class="nav-main-item">
               <a class="nav-main-link {{ Request::is('settings/roles*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
-                <span class="nav-main-link-name">{{ trans('Role & Permission') }}</span>
+                <span class="nav-main-link-name">{{ trans('page.roles.title') }}</span>
               </a>
             </li>
             @endcan

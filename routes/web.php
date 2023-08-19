@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Activities\ProgramController;
+use App\Http\Controllers\Activities\ScheduleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -52,5 +53,8 @@ Route::middleware(['auth', 'permission', 'verified'])->group(function () {
   Route::prefix('activities')->group(function () {
     // Program atau Kegiatan
     Route::resource('programs', ProgramController::class);
+
+    // Jadwal Acara atau Agenda Kegiatan
+    Route::resource('schedules', ScheduleController::class)->except('show');
   });
 });

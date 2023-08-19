@@ -47,4 +47,15 @@ return [
     'update' => 'Perbarui Kegiatan Acara yang ditentukan dalam penyimpanan',
     'destroy' => 'Hapus Kegiatan Acara yang ditentukan dari penyimpanan',
   ],
+
+  'schedules' => [
+    'name' => 'Management Agenda Kegiatan',
+    'index' => 'Menampilkan daftar Agenda Kegiatan',
+    'create' => 'Tampilkan formulir untuk membuat Agenda Kegiatan baru',
+    'store' => 'Simpan Agenda Kegiatan yang baru dibuat di penyimpanan',
+    'show' => 'Menampilkan Agenda Kegiatan yang ditentukan (Detail)',
+    'edit' => 'Tampilkan formulir untuk mengedit Agenda Kegiatan yang ditentukan',
+    'update' => 'Perbarui Agenda Kegiatan yang ditentukan dalam penyimpanan',
+    'destroy' => 'Hapus Agenda Kegiatan yang ditentukan dari penyimpanan',
+  ],
 ];

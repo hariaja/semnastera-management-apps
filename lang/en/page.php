@@ -25,7 +25,7 @@ return [
   ],
 
   'users' => [
-    'title' => 'Halaman Pengguna',
+    'title' => 'Pengguna',
     'index' => 'Daftar Data Pengguna',
     'create' => 'Tambah Data Pengguna',
     'edit' => 'Ubah Data Pengguna',
@@ -34,7 +34,7 @@ return [
   ],
 
   'roles' => [
-    'title' => 'Halaman Role & Permission',
+    'title' => 'Role & Permission',
     'index' => 'Daftar Role & Permission',
     'create' => 'Tambah Role & Permission',
     'edit' => 'Ubah Role & Permission',
@@ -43,7 +43,7 @@ return [
   ],
 
   'participants' => [
-    'title' => 'Halaman Pemakalah & Peserta',
+    'title' => 'Pemakalah & Peserta',
     'index' => 'Daftar Pemakalah & Peserta',
     'create' => 'Tambah Pemakalah & Peserta',
     'edit' => 'Ubah Pemakalah & Peserta',
@@ -52,11 +52,20 @@ return [
   ],
 
   'programs' => [
-    'title' => 'Halaman Kegiatan Acara',
-    'index' => 'Daftar Kegiatan Acara',
-    'create' => 'Tambah Kegiatan Acara',
-    'edit' => 'Ubah Kegiatan Acara',
-    'show' => 'Detail Kegiatan Acara',
-    'delete' => 'Hapus Kegiatan Acara',
+    'title' => 'Kegiatan',
+    'index' => 'Daftar Kegiatan',
+    'create' => 'Tambah Kegiatan',
+    'edit' => 'Ubah Kegiatan',
+    'show' => 'Detail Kegiatan',
+    'delete' => 'Hapus Kegiatan',
+  ],
+
+  'schedules' => [
+    'title' => 'Jadwal Kegiatan',
+    'index' => 'Daftar Jadwal Kegiatan',
+    'create' => 'Tambah Jadwal Kegiatan',
+    'edit' => 'Ubah Jadwal Kegiatan',
+    'show' => 'Detail Jadwal Kegiatan',
+    'delete' => 'Hapus Jadwal Kegiatan',
   ],
 ];

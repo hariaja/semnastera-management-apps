@@ -5,9 +5,9 @@ namespace App\Models;
 use App\Traits\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Program extends Model
+class Schedule extends Model
 {
   use HasFactory, Uuid;
 
@@ -18,9 +18,11 @@ class Program extends Model
    */
   protected $fillable = [
     'uuid',
-    'name',
-    'location',
-    'responsible',
+    'program_id',
+    'type',
+    'start_date',
+    'end_date',
+    'status',
   ];
 
   /**
@@ -32,22 +34,12 @@ class Program extends Model
   }
 
   /**
-   * Define location program
+   * Relation to Program Model.
    *
-   * @return string
+   * @return BelongsTo
    */
-  public function isLocation(): string
+  public function program(): BelongsTo
   {
-    return $this->location ?: '--';
-  }
-
-  /**
-   * Relation to Schedule Model.
-   *
-   * @return HasMany
-   */
-  public function schedules(): HasMany
-  {
-    return $this->hasMany(Schedule::class, 'program_id');
+    return $this->belongsTo(Program::class, 'program_id');
   }
 }
