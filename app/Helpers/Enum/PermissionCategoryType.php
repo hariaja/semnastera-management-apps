@@ -11,4 +11,5 @@ enum PermissionCategoryType: string
   case USERS = 'users.name';
   case ROLES = 'roles.name';
   case USER_CATEGORIES = 'participants.name';
+  case PROGRAMS = 'programs.name';
 }

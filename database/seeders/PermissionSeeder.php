@@ -32,6 +32,10 @@ class PermissionSeeder extends Seeder
       'participants.store',
       'participants.edit',
       'participants.update',
+
+      // Programs
+      'programs.index', 'programs.create', 'programs.store', 'programs.show',
+      'programs.edit', 'programs.update', 'programs.destroy',
     ];
 
     $guardName = 'web';
@@ -39,6 +43,7 @@ class PermissionSeeder extends Seeder
       'users' => 1,
       'roles' => 2,
       'participants' => 3,
+      'programs' => 4,
     ];
 
     foreach ($permissions as $permission) :

@@ -50,4 +50,13 @@ return [
     'show' => 'Detail Pemakalah & Peserta',
     'delete' => 'Hapus Pemakalah & Peserta',
   ],
+
+  'programs' => [
+    'title' => 'Halaman Kegiatan Acara',
+    'index' => 'Daftar Kegiatan Acara',
+    'create' => 'Tambah Kegiatan Acara',
+    'edit' => 'Ubah Kegiatan Acara',
+    'show' => 'Detail Kegiatan Acara',
+    'delete' => 'Hapus Kegiatan Acara',
+  ],
 ];
