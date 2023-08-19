@@ -57,7 +57,7 @@ class RoleRequest extends FormRequest
   {
     return [
       'name' => 'Peran',
-      'permission' => 'Hak akses',
+      'permission' => 'Hak Akses',
     ];
   }
 }

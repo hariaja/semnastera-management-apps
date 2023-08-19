@@ -108,17 +108,17 @@ class ParticipantRequest extends FormRequest
   public function attributes(): array
   {
     return [
-      'first_title' => 'Gelar depan',
-      'first_name' => 'Nama depan',
-      'last_name' => 'Nama belakang',
-      'last_title' => 'Gelar belakang',
-      'gender' => 'Jenis kelamin',
-      'roles' => 'Tipe akun',
-      'address' => 'Alamat lengkap',
-      'institution' => 'Asal institusi',
+      'first_title' => 'Gelar Depan',
+      'first_name' => 'Nama Depan',
+      'last_name' => 'Nama Belakang',
+      'last_title' => 'Gelar Belakang',
+      'gender' => 'Jenis Kelamin',
+      'roles' => 'Tipe Akun',
+      'address' => 'Alamat Lengkap',
+      'institution' => 'Asal Institusi',
       'email' => 'Email',
-      'phone' => 'Nomor telepon',
-      'avatar' => 'Foto profil',
+      'phone' => 'Nomor Telepon',
+      'avatar' => 'Avatar',
     ];
   }
 }

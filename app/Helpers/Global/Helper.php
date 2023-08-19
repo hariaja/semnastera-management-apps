@@ -17,6 +17,18 @@ class Helper
   public const ADMIN_CONTACT = '6285798888733';
 
   /**
+   * Redirect url with message
+   *
+   * @param  mixed $url
+   * @param  mixed $message
+   * @return void
+   */
+  public static function redirectUrl($url, string $message)
+  {
+    return redirect($url)->withSuccess($message);
+  }
+
+  /**
    * Handle upload avatar.
    *
    * @return void

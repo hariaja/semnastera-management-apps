@@ -77,11 +77,11 @@ class UserRequest extends FormRequest
   public function attributes(): array
   {
     return [
-      'name' => 'Nama lengkap',
+      'name' => 'Nama Lengkap',
       'email' => 'Email',
-      'phone' => 'Nomor telepon',
-      'roles' => 'Role pengguna',
-      'avatar' => 'Foto profil',
+      'phone' => 'Nomor Telepon',
+      'roles' => 'Role Pengguna',
+      'avatar' => 'Foto Profil',
     ];
   }
 }

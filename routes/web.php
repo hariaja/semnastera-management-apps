@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Activities\ProgramController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -46,4 +47,10 @@ Route::middleware(['auth', 'permission', 'verified'])->group(function () {
   // Management password users.
   Route::get('users/password/{user}', [PasswordController::class, 'showChangePasswordForm'])->name('users.password');
   Route::post('users/password', [PasswordController::class, 'store']);
+
+  // Journals
+  Route::prefix('activities')->group(function () {
+    // Program atau Kegiatan
+    Route::resource('programs', ProgramController::class);
+  });
 });

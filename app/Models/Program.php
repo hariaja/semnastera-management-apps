@@ -21,4 +21,22 @@ class Program extends Model
     'location',
     'responsible',
   ];
+
+  /**
+   * Get the route key for the model.
+   */
+  public function getRouteKeyName(): string
+  {
+    return 'uuid';
+  }
+
+  /**
+   * Define location program
+   *
+   * @return string
+   */
+  public function isLocation(): string
+  {
+    return $this->location ?: '--';
+  }
 }

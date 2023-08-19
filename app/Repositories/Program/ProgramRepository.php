@@ -4,7 +4,7 @@ namespace App\Repositories\Program;
 
 use LaravelEasyRepository\Repository;
 
-interface ProgramRepository extends Repository{
-
-    // Write something awesome :)
+interface ProgramRepository extends Repository
+{
+  public function query();
 }
