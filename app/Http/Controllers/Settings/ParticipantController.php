@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Settings;
 
-use App\Http\Controllers\Controller;
+use App\Helpers\Enum\GenderType;
 use App\Models\Participant;
-use App\Services\Participant\ParticipantService;
 use Illuminate\Http\Request;
+use App\Helpers\Enum\RoleType;
+use App\Services\Role\RoleService;
+use App\Services\User\UserService;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Settings\ParticipantRequest;
+use App\Services\Participant\ParticipantService;
 
 class ParticipantController extends Controller
 {
@@ -15,18 +20,11 @@ class ParticipantController extends Controller
    * @return void
    */
   public function __construct(
-    // protected UserService $userService,
+    protected RoleService $roleService,
+    protected UserService $userService,
     protected ParticipantService $participantService,
   ) {
     // 
-  }
-
-  /**
-   * Display a listing of the resource.
-   */
-  public function index()
-  {
-    //
   }
 
   /**
@@ -34,15 +32,23 @@ class ParticipantController extends Controller
    */
   public function create()
   {
-    //
+    $roleName = [
+      RoleType::PEMAKALAH->value,
+      RoleType::PARTICIPANT->value,
+    ];
+
+    $roles = $this->roleService->selectRoleWhereIn($roleName)->get();
+    $genderTypes = GenderType::toArray();
+    return view('settings.participants.create', compact('roles', 'genderTypes'));
   }
 
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(ParticipantRequest $request)
   {
-    //
+    $this->userService->createNewParticipant($request);
+    return redirect(route('users.index'))->withSuccess(trans('session.create'));
   }
 
   /**
@@ -58,22 +64,22 @@ class ParticipantController extends Controller
    */
   public function edit(Participant $participant)
   {
-    //
+    $roleName = [
+      RoleType::PEMAKALAH->value,
+      RoleType::PARTICIPANT->value,
+    ];
+
+    $roles = $this->roleService->selectRoleWhereIn($roleName)->get();
+    $genderTypes = GenderType::toArray();
+    return view('settings.participants.edit', compact('participant', 'roles', 'genderTypes'));
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, Participant $participant)
+  public function update(ParticipantRequest $request, Participant $participant)
   {
-    //
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   */
-  public function destroy(Participant $participant)
-  {
-    //
+    $this->userService->handleUpdateParticipant($request, $participant->id);
+    return redirect(route('users.index'))->withSuccess(trans('session.update'));
   }
 }

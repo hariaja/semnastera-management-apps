@@ -79,15 +79,16 @@ class UserController extends Controller
    */
   public function edit(User $user)
   {
-    //
+    return view('settings.users.edit', compact('user'));
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, User $user)
+  public function update(UserRequest $request, User $user)
   {
-    //
+    $this->userService->handleUpdateReviewer($request, $user->id);
+    return redirect(route('users.index'))->withSuccess(trans('session.update'));
   }
 
   /**

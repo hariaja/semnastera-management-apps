@@ -62,6 +62,7 @@ class UserRequest extends FormRequest
 
       'roles.required' => ':attribute tidak boleh dikosongkan',
       'roles.string' => ':attribute tidak valid, masukkan yang benar',
+      'roles.in' => ':attribute yang anda masukkan tidak valid',
 
       'avatar.image' => ':attribute tidak valid, pastikan memilih gambar',
       'avatar.mimes' => ':attribute tidak valid, masukkan gambar dengan format jpg atau png',

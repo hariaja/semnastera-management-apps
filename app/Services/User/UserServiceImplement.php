@@ -52,16 +52,13 @@ class UserServiceImplement extends Service implements UserService
        * Jika ada avatar yang diupload maka akan digunakan sebagai avatar user
        * Jika tidak ada, maka avatar secara otomatis bernilai null
        */
-      $avatar = $request->file('avatar') ? Storage::putFile(
-        'public/images/' . strtolower($this->getRoleName($request->roles)),
-        $request->file('avatar')
-      ) : null;
+      $avatar = Helper::uploadAvatar($request, null, $request->roles);
 
       // Siapkan data yang akan di insert ke tabel users
       $validated = $request->validated();
       $validated['name'] = "{$validated['first_name']} {$validated['last_name']}";
       $validated['avatar'] = $avatar;
-      $validated['password'] = $request->input('roles') ? Hash::make(Helper::DEFAULT_PASSWORD) : Hash::make($request->password);
+      $validated['password'] = $request->input('password') ? Hash::make($request->password) : Hash::make(Helper::DEFAULT_PASSWORD);
       $validated['status'] = StatusUserType::ACTIVE->value;
 
       // Masukkan Data tersebut ke table users
@@ -102,10 +99,7 @@ class UserServiceImplement extends Service implements UserService
        * Jika ada avatar yang diupload maka akan digunakan sebagai avatar user
        * Jika tidak ada, maka avatar secara otomatis bernilai null
        */
-      $avatar = $request->file('avatar') ? Storage::putFile(
-        'public/images/' . strtolower($this->getRoleName($role->id)),
-        $request->file('avatar')
-      ) : null;
+      $avatar = Helper::uploadAvatar($request, null, $role->id);
 
       # Save data into database
       $validation = $request->validated();
@@ -116,6 +110,71 @@ class UserServiceImplement extends Service implements UserService
       # Sync user to role
       $user = $this->mainRepository->create($validation);
       $user->assignRole($request->roles);
+    });
+  }
+
+  /**
+   * Update Existing User Data.
+   *
+   * @param  mixed $request
+   * @param  mixed $id
+   * @return void
+   */
+  public function handleUpdateReviewer($request, $id)
+  {
+    return DB::transaction(function () use ($request, $id) {
+      // Find User by Id
+      $user = $this->mainRepository->findOrFail($id);
+
+      // Handle upload avatar
+      $avatar = Helper::uploadAvatar($request, $user, $user->isRoleId());
+
+      # Handle update users
+      $validation = $request->validated();
+      $validation['avatar'] = $avatar;
+
+      return $this->mainRepository->update($user->id, $validation);
+    });
+  }
+
+  /**
+   * Service Handle update participant in storage.
+   *
+   * @param  mixed $request
+   * @param  mixed $id
+   * @return void
+   */
+  public function handleUpdateParticipant($request, $id)
+  {
+    return DB::transaction(function () use ($request, $id) {
+      // Find Participant Data
+      $participant = $this->participantRepository->findOrFail($id);
+
+      // Find User Data
+      $user = $this->mainRepository->findOrFail($participant->user_id);
+
+      // Upload avatar
+      $avatar = Helper::uploadAvatar($request, $user, $user->isRoleId());
+
+      // Update User & Participant Data
+      $validated = $request->validated();
+      $validated['avatar'] = $avatar;
+      $validated['name'] = "{$validated['first_name']} {$validated['last_name']}";
+
+      $user->update($validated);
+      $user->assignRole($validated['roles']);
+
+      $data = [
+        'first_title' => strtoupper($validated['first_title']),
+        'last_title' => strtoupper($validated['last_title']),
+        'first_name' => $validated['first_name'],
+        'last_name' => $validated['last_name'],
+        'gender' => $validated['gender'],
+        'institution' => strtoupper($validated['institution']),
+        'address' => $validated['address'],
+      ];
+
+      return $this->participantRepository->update($participant->id, $data);
     });
   }
 

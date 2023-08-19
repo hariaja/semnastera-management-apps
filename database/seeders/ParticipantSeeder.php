@@ -47,7 +47,7 @@ class ParticipantSeeder extends Seeder
       '085659466622',
       GenderType::FEMALE->value,
       'Politeknik Sukabumi',
-      'Jl. Perintis Kemerdekaan No. 130 Kec. Cibadak, Kab. Sukabumi, Jawa Barat Indonesia 43351',
+      'Jl. Perintis Kemerdekaan No. 130 Kec. Cibadak, Kab. Sukabumi, Prov. Jawa Barat 43351 Indonesia',
       RoleType::PEMAKALAH->value
     );
 
@@ -67,7 +67,7 @@ class ParticipantSeeder extends Seeder
       '085659466677',
       GenderType::MALE->value,
       'Politeknik Sukabumi',
-      '176, Jalan Selabintana No. 176, Warnasari, Sukamekar, Jawa Barat, Sukabumi, 43114',
+      'Jl. Perintis Kemerdekaan No. 130 Kec. Cibadak, Kab. Sukabumi, Prov. Jawa Barat 43351 Indonesia',
       RoleType::PARTICIPANT->value
     );
   }

@@ -12,5 +12,7 @@ interface UserService extends BaseService
   public function updateStatusAccount(int $id);
   public function createNewReviewer(Request $request);
   public function createNewParticipant(Request $request);
+  public function handleUpdateReviewer(Request $request, int $id);
+  public function handleUpdateParticipant(Request $request, int $id);
   public function handleDeleteUser(int $id);
 }

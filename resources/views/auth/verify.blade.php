@@ -82,8 +82,8 @@
                       <div class="col-md-6">
 
                         <button type="submit" class="btn w-100 btn-primary" id="submit-button">
-                          <i class="fa fa-fw fa-circle-check me-1"></i>
-                          {{ trans('page.login.title') }}
+                          <i class="fa fa-fw fa-paper-plane me-1"></i>
+                          {{ trans('Kirim Verifikasi Email') }}
                         </button>
 
                       </div>
