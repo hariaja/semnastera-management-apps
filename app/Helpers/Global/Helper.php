@@ -79,7 +79,7 @@ class Helper
       $roles === RoleType::PARTICIPANT->value
     ) {
       $genderTypes = GenderType::toArray();
-      $participant = Participant::where('user_id', $user->id)->first();
+      $participant = Participant::firstWhere('user_id', $user->id);
       return view('settings.participants.show', compact('user', 'genderTypes', 'participant'));
     } else {
       return view('settings.users.show', compact('user'));
