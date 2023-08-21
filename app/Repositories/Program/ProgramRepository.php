@@ -7,4 +7,5 @@ use LaravelEasyRepository\Repository;
 interface ProgramRepository extends Repository
 {
   public function query();
+  public function getDoesntHaveSchedule();
 }

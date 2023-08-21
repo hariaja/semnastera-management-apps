@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\Enum\ScheduleType;
 use App\Helpers\Enum\StatusScheduleType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,7 +17,7 @@ return new class extends Migration
       $table->id();
       $table->string('uuid');
       $table->foreignId('program_id')->constrained('programs', 'id')->onDelete('cascade');
-      $table->string('type', 50);
+      $table->enum('type', ScheduleType::toArray());
       $table->date('start_date');
       $table->date('end_date');
       $table->enum('status', StatusScheduleType::toArray())->default(StatusScheduleType::CLOSE->value);

@@ -4,7 +4,8 @@ namespace App\Repositories\Schedule;
 
 use LaravelEasyRepository\Repository;
 
-interface ScheduleRepository extends Repository{
-
-    // Write something awesome :)
+interface ScheduleRepository extends Repository
+{
+  public function query();
+  public function scheduleByProgramIdWhereType(int $programId, string $type);
 }

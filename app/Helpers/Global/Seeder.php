@@ -7,6 +7,7 @@ use App\Models\Participant;
 use App\Helpers\Global\Helper;
 use App\Helpers\Enum\StatusUserType;
 use App\Models\Program;
+use App\Models\Schedule;
 
 class Seeder
 {
@@ -39,6 +40,17 @@ class Seeder
       'name' => $name,
       'location' => $location,
       'responsible' => $responsible,
+    ]);
+  }
+
+  public static function createSchedule(int $programId, string $type, string $start_date, string $end_date, string $status)
+  {
+    return Schedule::create([
+      'program_id' => $programId,
+      'type' => $type,
+      'start_date' => $start_date,
+      'end_date' => $end_date,
+      'status' => $status,
     ]);
   }
 }

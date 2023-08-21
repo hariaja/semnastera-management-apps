@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Helpers\Global\Seeder as GlobalSeeder;
+use App\Helpers\Global\Seeder as HelperSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,14 +15,24 @@ class ProgramSeeder extends Seeder
   {
     $programs = [
       [
-        'name' => 'Seminar Nasional Teknologi dan Riset BATCH I',
+        'name' => 'Semnastera XI',
+        'location' => 'Aula Politeknik Sukabumi',
+        'responsible' => 'Dewi Ayu Sofia, S. Pd., M. Eng',
+      ],
+      [
+        'name' => 'Semnastera XII',
+        'location' => 'Aula Politeknik Sukabumi',
+        'responsible' => 'Dewi Ayu Sofia, S. Pd., M. Eng',
+      ],
+      [
+        'name' => 'Semnastera XIII',
         'location' => 'Aula Politeknik Sukabumi',
         'responsible' => 'Dewi Ayu Sofia, S. Pd., M. Eng',
       ],
     ];
 
     foreach ($programs as $program) {
-      GlobalSeeder::createProgram(
+      HelperSeeder::createProgram(
         $program['name'],
         $program['location'],
         $program['responsible'],

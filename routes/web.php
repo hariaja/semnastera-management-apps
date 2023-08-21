@@ -55,6 +55,6 @@ Route::middleware(['auth', 'permission', 'verified'])->group(function () {
     Route::resource('programs', ProgramController::class);
 
     // Jadwal Acara atau Agenda Kegiatan
-    Route::resource('schedules', ScheduleController::class)->except('show');
+    Route::resource('schedules', ScheduleController::class);
   });
 });

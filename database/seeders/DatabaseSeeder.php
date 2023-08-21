@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
       ReviewerSeeder::class,
       ParticipantSeeder::class,
       ProgramSeeder::class,
+      ScheduleSeeder::class,
     ]);
   }
 }

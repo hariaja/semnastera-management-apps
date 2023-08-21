@@ -38,7 +38,7 @@ class PermissionSeeder extends Seeder
       'programs.edit', 'programs.update', 'programs.destroy',
 
       // Schedules
-      'schedules.index', 'schedules.create', 'schedules.store',
+      'schedules.index', 'schedules.create', 'schedules.store', 'schedules.show',
       'schedules.edit', 'schedules.update', 'schedules.destroy',
     ];
 

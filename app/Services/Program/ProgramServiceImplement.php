@@ -28,4 +28,14 @@ class ProgramServiceImplement extends Service implements ProgramService
       return $this->mainRepository->query();
     });
   }
+
+  /**
+   * Get program data that does not have schedule data or only has one.
+   */
+  public function getDoesntHaveSchedule()
+  {
+    return DB::transaction(function () {
+      return $this->mainRepository->getDoesntHaveSchedule();
+    });
+  }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Repositories\Program;
 
-use LaravelEasyRepository\Implementations\Eloquent;
+use App\Helpers\Enum\ScheduleType;
 use App\Models\Program;
+use Illuminate\Database\Eloquent\Builder;
+use LaravelEasyRepository\Implementations\Eloquent;
 
 class ProgramRepositoryImplement extends Eloquent implements ProgramRepository
 {
@@ -25,5 +27,29 @@ class ProgramRepositoryImplement extends Eloquent implements ProgramRepository
   public function query()
   {
     return $this->model->query();
+  }
+
+  /**
+   * Get program data that does not have schedule data or only has one.
+   */
+  public function getDoesntHaveSchedule()
+  {
+    return $this->model->where(function (Builder $query) {
+      $query->whereDoesntHave('schedules', function ($subQuery) {
+        $subQuery->whereIn('type', ScheduleType::toArray());
+      })->orWhere(function ($subQuery) {
+        $subQuery->whereHas('schedules', function ($subSubQuery) {
+          $subSubQuery->whereIn('type', ScheduleType::toArray(0));
+        })->whereDoesntHave('schedules', function ($subSubQuery) {
+          $subSubQuery->whereIn('type', ScheduleType::toArray(1));
+        });
+      })->orWhere(function ($subQuery) {
+        $subQuery->whereHas('schedules', function ($subSubQuery) {
+          $subSubQuery->whereIn('type', ScheduleType::toArray(1));
+        })->whereDoesntHave('schedules', function ($subSubQuery) {
+          $subSubQuery->whereIn('type', ScheduleType::toArray(0));
+        });
+      });
+    });
   }
 }
