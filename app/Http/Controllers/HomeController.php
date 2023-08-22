@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Enum\RoleType;
+use App\Helpers\Global\Helper;
+use App\Services\Program\ProgramService;
+use App\Services\User\UserService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,8 +15,10 @@ class HomeController extends Controller
    *
    * @return void
    */
-  public function __construct()
-  {
+  public function __construct(
+    protected UserService $userService,
+    protected ProgramService $programService,
+  ) {
     $this->middleware(['auth', 'verified']);
   }
 
@@ -23,6 +29,11 @@ class HomeController extends Controller
    */
   public function index()
   {
-    return view('home');
+    $data = [
+      'user_count' => $this->userService->getUserNotAdmin()->count(),
+      'program_count' => $this->programService->query()->select('*')->count(),
+    ];
+
+    return Helper::getHomeView(isRoleName(), $data);
   }
 }

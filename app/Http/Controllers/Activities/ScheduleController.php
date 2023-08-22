@@ -52,7 +52,7 @@ class ScheduleController extends Controller
   public function store(ScheduleRequest $request)
   {
     $this->scheduleService->createSchedule($request);
-    return Helper::redirectUrl(route('schedules.index'), trans('session.create'));
+    return redirect(route('schedules.index'))->withSuccess(trans('session.create'));
   }
 
   /**
@@ -77,10 +77,10 @@ class ScheduleController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, Schedule $schedule)
+  public function update(ScheduleRequest $request, Schedule $schedule)
   {
     $this->scheduleService->update($schedule->id, $request->all());
-    return Helper::redirectUrl(route('schedules.index'), trans('session.update'));
+    return redirect(route('schedules.index'))->withSuccess(trans('session.update'));
   }
 
   /**

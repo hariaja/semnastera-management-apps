@@ -29,23 +29,22 @@ class Helper
   }
 
   /**
-   * Handle upload avatar.
+   * Helper to Upload Files.
    *
    * @return void
    */
-  public static function uploadAvatar(
+  public static function uploadFile(
     Request $request,
-    User $user = null,
-    int $roleId = null
+    string $filePath,
+    string $currentFilePath = null
   ) {
-    if ($request->file('avatar')) {
-      if ($user && $user->avatar) {
-        Storage::delete($user->avatar);
+    if ($request->file('file')) {
+      if ($currentFilePath) {
+        Storage::delete($currentFilePath);
       }
-      $roleName = strtolower(self::getRoleName($roleId));
-      return Storage::putFile("public/images/{$roleName}", $request->file('avatar'));
-    } elseif ($user) {
-      return $user->avatar;
+      return Storage::putFile("public/{$filePath}", $request->file('file'));
+    } elseif ($currentFilePath) {
+      return $currentFilePath;
     } else {
       return null;
     }
@@ -75,6 +74,21 @@ class Helper
   {
     $role = Role::findOrFail($roleId);
     return $role->name;
+  }
+
+  /**
+   * Get condition for user home view
+   */
+  public static function getHomeView(string $roles, array $data)
+  {
+    if (
+      $roles === RoleType::PEMAKALAH->value ||
+      $roles === RoleType::PARTICIPANT->value
+    ) {
+      return view('home.user', $data);
+    } else {
+      return view('home.admin', $data);
+    }
   }
 
   /**

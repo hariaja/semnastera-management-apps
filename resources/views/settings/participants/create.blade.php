@@ -187,8 +187,8 @@
     
               <div class="mb-3">
                 <label class="form-label" for="image">{{ trans('Upload Avatar') }}</label>
-                <input class="form-control @error('avatar') is-invalid @enderror" type="file" accept="image/*" id="image" name="avatar" onchange="return previewImage()">
-                @error('avatar')
+                <input class="form-control @error('file') is-invalid @enderror" type="file" accept="image/*" id="image" name="file" onchange="return previewImage()">
+                @error('file')
                   <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
               </div>

@@ -4,6 +4,7 @@ namespace App\Services\User;
 
 use App\Helpers\Enum\StatusUserType;
 use App\Helpers\Global\Helper;
+use App\Helpers\Global\Upload;
 use App\Repositories\Participant\ParticipantRepository;
 use Exception;
 use Illuminate\Http\Request;
@@ -52,7 +53,7 @@ class UserServiceImplement extends Service implements UserService
        * Jika ada avatar yang diupload maka akan digunakan sebagai avatar user
        * Jika tidak ada, maka avatar secara otomatis bernilai null
        */
-      $avatar = Helper::uploadAvatar($request, null, $request->roles);
+      $avatar = Helper::uploadFile($request, "images/{$request->roles}", null);
 
       // Siapkan data yang akan di insert ke tabel users
       $validated = $request->validated();
@@ -99,7 +100,7 @@ class UserServiceImplement extends Service implements UserService
        * Jika ada avatar yang diupload maka akan digunakan sebagai avatar user
        * Jika tidak ada, maka avatar secara otomatis bernilai null
        */
-      $avatar = Helper::uploadAvatar($request, null, $role->id);
+      $avatar = Helper::uploadFile($request, "images/{$this->getRoleName($role->id)}", null);
 
       # Save data into database
       $validation = $request->validated();
@@ -127,7 +128,7 @@ class UserServiceImplement extends Service implements UserService
       $user = $this->mainRepository->findOrFail($id);
 
       // Handle upload avatar
-      $avatar = Helper::uploadAvatar($request, $user, $user->isRoleId());
+      $avatar = Helper::uploadFile($request, "images/{$this->getRoleName($user->isRoleId())}", $user->avatar);
 
       # Handle update users
       $validation = $request->validated();
@@ -154,7 +155,7 @@ class UserServiceImplement extends Service implements UserService
       $user = $this->mainRepository->findOrFail($participant->user_id);
 
       // Upload avatar
-      $avatar = Helper::uploadAvatar($request, $user, $user->isRoleId());
+      $avatar = Helper::uploadFile($request, "images/{$this->getRoleName($user->isRoleId())}", $user->avatar);
 
       // Update User & Participant Data
       $validated = $request->validated();
@@ -230,6 +231,6 @@ class UserServiceImplement extends Service implements UserService
   protected function getRoleName(int $id): string
   {
     $role = $this->roleRepository->findOrFail($id);
-    return "{$role->name}s";
+    return "{$role->name}";
   }
 }

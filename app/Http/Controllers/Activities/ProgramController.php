@@ -45,8 +45,7 @@ class ProgramController extends Controller
   public function store(ProgramRequest $request)
   {
     $this->programService->create($request->validated());
-    // return redirect(route('programs.index'))->withSuccess(trans('session.create'));
-    return Helper::redirectUrl(route('programs.index'), trans('session.create'));
+    return redirect(route('programs.index'))->withSuccess(trans('session.create'));
   }
 
   /**
@@ -71,7 +70,7 @@ class ProgramController extends Controller
   public function update(ProgramRequest $request, Program $program)
   {
     $this->programService->update($program->id, $request->validated());
-    return Helper::redirectUrl(route('programs.index'), trans('session.update'));
+    return redirect(route('programs.index'))->withSuccess(trans('session.update'));
   }
 
   /**

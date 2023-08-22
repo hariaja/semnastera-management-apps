@@ -85,13 +85,9 @@
             </div>
 
             <div class="mb-4">
-              <input type="hidden" name="old_avatar" id="old_avatar" class="form-control" value="{{ $user->avatar }}">
-            </div>
-
-            <div class="mb-4">
               <label class="form-label" for="image">{{ trans('Upload Avatar') }}</label>
-              <input class="form-control @error('avatar') is-invalid @enderror" type="file" accept="image/*" id="image" name="avatar" onchange="return previewImage()">
-              @error('avatar')
+              <input class="form-control @error('file') is-invalid @enderror" type="file" accept="image/*" id="image" name="file" onchange="return previewImage()">
+              @error('file')
                 <div class="invalid-feedback">{{ $message }}</div>
               @enderror
             </div>

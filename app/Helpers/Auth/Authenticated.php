@@ -32,3 +32,19 @@ function isRoleName(): string
 {
   return me()->roles->implode('name');
 }
+
+/**
+ * Check Single Permissions
+ *
+ * @param  mixed $permission
+ * @return void
+ */
+function checkPermission(string $permission)
+{
+  return me()->can($permission);
+}
+
+function checkPermissions(array $permissions = [])
+{
+  return me()->canany($permissions);
+}

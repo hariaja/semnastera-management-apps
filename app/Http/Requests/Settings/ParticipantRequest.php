@@ -38,7 +38,7 @@ class ParticipantRequest extends FormRequest
       'roles' => 'required',
       'address' => 'required|string',
       'institution' => 'required|string',
-      'avatar' => 'nullable|mimes:jpg,png|max:3048',
+      'file' => 'nullable|mimes:jpg,png|max:3048',
       'email' => [
         'required', 'email',
         $method === 'POST' ? Rule::unique('users', 'email') : Rule::unique('users', 'email')->ignore($userId),
@@ -95,9 +95,9 @@ class ParticipantRequest extends FormRequest
       'phone.numeric' => ':attribute harus berupa angka',
       'phone.min' => ':attribute terlalu pendek, minimal :min karakter',
 
-      'avatar.image' => ':attribute tidak valid, pastikan memilih gambar',
-      'avatar.mimes' => ':attribute tidak valid, masukkan gambar dengan format jpg atau png',
-      'avatar.max' => ':attribute terlalu besar, maksimal :max kb',
+      'file.image' => ':attribute tidak valid, pastikan memilih gambar',
+      'file.mimes' => ':attribute tidak valid, masukkan gambar dengan format jpg atau png',
+      'file.max' => ':attribute terlalu besar, maksimal :max kb',
     ];
   }
 
@@ -118,7 +118,7 @@ class ParticipantRequest extends FormRequest
       'institution' => 'Asal Institusi',
       'email' => 'Email',
       'phone' => 'Nomor Telepon',
-      'avatar' => 'Avatar',
+      'file' => 'Foto Profil',
     ];
   }
 }

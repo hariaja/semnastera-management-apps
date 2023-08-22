@@ -33,7 +33,7 @@ class UserRequest extends FormRequest
         'required', 'numeric', 'min:12',
         Rule::unique('users', 'phone')->ignore($this->user),
       ],
-      'avatar' => 'nullable|mimes:jpg,png|max:3048',
+      'file' => 'nullable|mimes:jpg,png|max:3048',
       'roles' => 'required|' . RoleType::toValidation(0, 1),
     ];
 
@@ -64,9 +64,9 @@ class UserRequest extends FormRequest
       'roles.string' => ':attribute tidak valid, masukkan yang benar',
       'roles.in' => ':attribute yang anda masukkan tidak valid',
 
-      'avatar.image' => ':attribute tidak valid, pastikan memilih gambar',
-      'avatar.mimes' => ':attribute tidak valid, masukkan gambar dengan format jpg atau png',
-      'avatar.max' => ':attribute terlalu besar, maksimal :max kb',
+      'file.image' => ':attribute tidak valid, pastikan memilih gambar',
+      'file.mimes' => ':attribute tidak valid, masukkan gambar dengan format jpg atau png',
+      'file.max' => ':attribute terlalu besar, maksimal :max kb',
     ];
   }
 
@@ -81,7 +81,7 @@ class UserRequest extends FormRequest
       'email' => 'Email',
       'phone' => 'Nomor Telepon',
       'roles' => 'Role Pengguna',
-      'avatar' => 'Foto Profil',
+      'file' => 'Foto Profil',
     ];
   }
 }

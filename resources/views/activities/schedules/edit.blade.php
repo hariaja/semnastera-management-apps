@@ -46,6 +46,9 @@
           <div class="mb-4">
             <label for="type" class="form-label">{{ trans('Jadwal Kegiatan') }}</label>
             <input type="text" name="type" id="type" value="{{ old('type', $schedule->type) }}" class="form-control @error('type') is-invalid @enderror" readonly>
+            @error('type')
+              <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
           </div>
 
           <div class="mb-4">
