@@ -43,7 +43,7 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row mb-4">
         <div class="col-md-12">
           <div class="d-flex justify-content-between">
             <div class="space-y-2">
@@ -55,15 +55,27 @@
                 @enderror
               </div>
             </div>
-            <span class="fw-normal">
-              {{ trans('Filter Berdasarkan Nama Kategori Izin') }}
-            </span>
+            <div class="">
+              <span class="text-muted">
+                {{ trans('Scroll untuk melihat lebih') }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="my-3">
-        {{ $dataTable->table() }}
+      {{-- Row Block Content --}}
+      <div class="row mb-4" id="data-temp"></div>
+
+      <div class="ajax-load text-center" style="display:none">
+        <i class="mdi mdi-48px mdi-spin mdi-loading"></i>
+      </div>
+
+      {{-- No Data When Scrolling Done --}}
+      <div class="no-data mb-4" style="display:none">
+        <h6 class="text-center">
+          {{ trans('Kami tidak memiliki lebih banyak data untuk ditampilkan (Last Page)') }}
+        </h6>
       </div>
 
       <div class="row justify-content-center">
@@ -83,8 +95,8 @@
 </div>
 @endsection
 @push('javascript')
-{{ $dataTable->scripts() }}
-<script>
+  <script>
+    window.translations = @json(trans('permission'));
+  </script>
   @vite('resources/js/settings/roles/input.js')
-</script>
 @endpush

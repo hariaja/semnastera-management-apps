@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Settings;
 
-use App\DataTables\Scopes\RoleFilter;
-use App\DataTables\Scopes\StatusFilter;
-use App\DataTables\Settings\UserDataTable;
-use App\Helpers\Enum\RoleType;
-use App\Helpers\Enum\StatusUserType;
-use App\Helpers\Global\Helper;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Helpers\Enum\RoleType;
+use App\Helpers\Global\Helper;
 use App\Services\Role\RoleService;
 use App\Services\User\UserService;
 use App\Http\Controllers\Controller;
+use App\DataTables\Scopes\RoleFilter;
+use App\Helpers\Enum\StatusActiveType;
+use App\DataTables\Scopes\StatusFilter;
+use App\DataTables\Settings\UserDataTable;
 use App\Http\Requests\Settings\UserRequest;
 
 class UserController extends Controller
@@ -35,7 +35,7 @@ class UserController extends Controller
   public function index(UserDataTable $dataTable, Request $request)
   {
     $roleTypes = RoleType::toArray();
-    $statusUserTypes = StatusUserType::toArray();
+    $statusUserTypes = StatusActiveType::toArray();
 
     return $dataTable
       ->addScope(new RoleFilter($request))

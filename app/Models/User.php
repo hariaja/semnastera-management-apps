@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use App\Helpers\Enum\RoleType;
-use App\Helpers\Enum\StatusUserType;
 use App\Traits\Uuid;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Helpers\Enum\RoleType;
 use Laravel\Sanctum\HasApiTokens;
+use App\Helpers\Enum\StatusActiveType;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -115,8 +115,8 @@ class User extends Authenticatable implements MustVerifyEmail
    */
   public function getAccountStatus(): string
   {
-    $badgeClass = ($this->status == StatusUserType::ACTIVE->value) ? 'badge text-success' : 'badge text-danger';
-    $badgeText = ($this->status == StatusUserType::ACTIVE->value) ? 'Active' : 'Inactive';
+    $badgeClass = ($this->status == StatusActiveType::ACTIVE->value) ? 'badge text-success' : 'badge text-danger';
+    $badgeText = ($this->status == StatusActiveType::ACTIVE->value) ? 'Active' : 'Inactive';
 
     return "<span class='{$badgeClass}'>{$badgeText}</span>";
   }
@@ -139,7 +139,7 @@ class User extends Authenticatable implements MustVerifyEmail
    */
   public function scopeActive($data)
   {
-    return $data->where('status', StatusUserType::ACTIVE->value);
+    return $data->where('status', StatusActiveType::ACTIVE->value);
   }
 
   /**
@@ -155,7 +155,7 @@ class User extends Authenticatable implements MustVerifyEmail
    */
   public function scopeInactive($data)
   {
-    return $data->where('status', StatusUserType::INACTIVE->value);
+    return $data->where('status', StatusActiveType::INACTIVE->value);
   }
 
   /**

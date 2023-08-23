@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Helpers\Enum\StatusUserType;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Helpers\Enum\StatusActiveType;
 use Symfony\Component\HttpFoundation\Response;
 
 class CheckBanned
@@ -17,7 +17,7 @@ class CheckBanned
    */
   public function handle(Request $request, Closure $next): Response
   {
-    if (Auth::check() && me()->status == StatusUserType::INACTIVE->value) :
+    if (Auth::check() && me()->status == StatusActiveType::INACTIVE->value) :
       Auth::logout();
       $request->session()->invalidate();
       $request->session()->regenerateToken();

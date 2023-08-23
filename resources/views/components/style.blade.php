@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{{ asset('assets/src/js/plugins/magnific-popup/magnific-popup.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/src/js/plugins/sweetalert2/sweetalert2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/src/js/plugins/simplemde/simplemde.min.css') }}">
+<link rel="stylesheet" href="//cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
 <link rel="stylesheet" href="{{ asset('assets/src/css/oneui.min.css') }}" id="css-main">
 
 <!-- Datatables -->

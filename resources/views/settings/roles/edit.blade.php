@@ -46,23 +46,40 @@
           </div>
         </div>
 
-        <div class="mb-4">
-          <div class="space-y-2">
-            <div class="form-check">
-              <input type="checkbox" name="all_permission" id="all_permission" class="form-check-input @error('permission') is-invalid @enderror">
-              <label for="all_permission" class="form-check-label">{{ trans('Pilih Semua Hak Akses') }}</label>
-              @error('permission')
-                <div class="invalid-feedback">
-                  <strong>{{ $message }}</strong>
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <div class="d-flex justify-content-between">
+              <div class="space-y-2">
+                <div class="form-check">
+                  <input type="checkbox" name="all_permission" id="all_permission" class="form-check-input @error('permission') is-invalid @enderror">
+                  <label for="all_permission" class="form-check-label">{{ trans('Pilih Semua Hak Akses') }}</label>
+                  @error('permission')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
                 </div>
-              @enderror
+              </div>
+              <div class="">
+                <span class="text-muted">
+                  {{ trans('Scroll untuk melihat lebih') }}
+                </span>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="my-3">
-          {{ $dataTable->table() }}
-        </div>
+      {{-- Row Block Content --}}
+      <div class="row mb-4" id="data-temp"></div>
+
+      <div class="ajax-load text-center" style="display:none">
+        <i class="mdi mdi-48px mdi-spin mdi-loading"></i>
+      </div>
+
+      {{-- No Data When Scrolling Done --}}
+      <div class="no-data mb-4" style="display:none">
+        <h6 class="text-center">
+          {{ trans('Kami tidak memiliki lebih banyak data untuk ditampilkan (Last Page)') }}
+        </h6>
+      </div>
 
         <div class="row justify-content-center">
           <div class="col-md-6">
@@ -81,8 +98,8 @@
   </div>
 @endsection
 @push('javascript')
-{{ $dataTable->scripts() }}
 <script>
-  @vite('resources/js/settings/roles/input.js')
+  window.translations = @json(trans('permission'));
 </script>
+@vite('resources/js/settings/roles/input.js')
 @endpush

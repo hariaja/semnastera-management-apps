@@ -2,9 +2,9 @@
 
 namespace App\Repositories\User;
 
-use App\Helpers\Enum\StatusUserType;
-use LaravelEasyRepository\Implementations\Eloquent;
 use App\Models\User;
+use App\Helpers\Enum\StatusActiveType;
+use LaravelEasyRepository\Implementations\Eloquent;
 
 class UserRepositoryImplement extends Eloquent implements UserRepository
 {
@@ -72,7 +72,7 @@ class UserRepositoryImplement extends Eloquent implements UserRepository
   public function updateStatusAccount($id)
   {
     $user = $this->findOrFail($id);
-    $newStatus = ($user->status == StatusUserType::ACTIVE->value) ? StatusUserType::INACTIVE->value : StatusUserType::ACTIVE->value;
+    $newStatus = ($user->status == StatusActiveType::ACTIVE->value) ? StatusActiveType::INACTIVE->value : StatusActiveType::ACTIVE->value;
     $user->updateOrFail([
       'status' => $newStatus,
     ]);

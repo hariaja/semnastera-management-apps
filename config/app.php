@@ -189,7 +189,7 @@ return [
         'Helper' => App\Helpers\Global\Helper::class,
         'GenderType' => App\Helpers\Enum\GenderType::class,
         'RoleType' => App\Helpers\Enum\RoleType::class,
-        'StatusUserType' => App\Helpers\Enum\StatusUserType::class,
+        'StatusActiveType' => App\Helpers\Enum\StatusActiveType::class,
     ])->toArray(),
 
 ];

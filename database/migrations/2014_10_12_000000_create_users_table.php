@@ -1,6 +1,6 @@
 <?php
 
-use App\Helpers\Enum\StatusUserType;
+use App\Helpers\Enum\StatusActiveType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,7 +21,7 @@ return new class extends Migration
       $table->timestamp('email_verified_at')->nullable();
       $table->string('password');
       $table->string('avatar', 190)->nullable();
-      $table->boolean('status')->default(StatusUserType::INACTIVE->value);
+      $table->boolean('status')->default(StatusActiveType::INACTIVE->value);
       $table->rememberToken();
       $table->timestamps();
     });

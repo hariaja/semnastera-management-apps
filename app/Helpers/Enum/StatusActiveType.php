@@ -4,7 +4,7 @@ namespace App\Helpers\Enum;
 
 use App\Traits\EnumsToArray;
 
-enum StatusUserType: int
+enum StatusActiveType: int
 {
   use EnumsToArray;
 

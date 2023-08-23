@@ -5,7 +5,7 @@ namespace App\Helpers\Global;
 use App\Models\User;
 use App\Models\Participant;
 use App\Helpers\Global\Helper;
-use App\Helpers\Enum\StatusUserType;
+use App\Helpers\Enum\StatusActiveType;
 use App\Models\Program;
 use App\Models\Schedule;
 
@@ -19,7 +19,7 @@ class Seeder
       'phone' => $phone,
       'email_verified_at' => now(),
       'password' => bcrypt(Helper::DEFAULT_PASSWORD),
-      'status' => StatusUserType::ACTIVE->value,
+      'status' => StatusActiveType::ACTIVE->value,
     ])->assignRole($role);
 
     Participant::create([

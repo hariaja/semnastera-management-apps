@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Helpers\Enum\RoleType;
 use App\Helpers\Global\Helper;
 use Illuminate\Database\Seeder;
-use App\Helpers\Enum\StatusUserType;
+use App\Helpers\Enum\StatusActiveType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class AdminSeeder extends Seeder
@@ -23,7 +23,7 @@ class AdminSeeder extends Seeder
       'phone' => '085798888733',
       'email_verified_at' => now(),
       'password' => bcrypt(Helper::DEFAULT_PASSWORD),
-      'status' => StatusUserType::ACTIVE->value,
+      'status' => StatusActiveType::ACTIVE->value,
     ])->assignRole(RoleType::ADMIN->value);
   }
 }

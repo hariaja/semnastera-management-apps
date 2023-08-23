@@ -36,9 +36,16 @@ class RoleController extends Controller
   /**
    * Show the form for creating a new resource.
    */
-  public function create(PermissionCategoryDataTable $dataTable)
+  public function create(Request $request)
   {
-    return $dataTable->render('settings.roles.create');
+    if ($request->ajax()) :
+      $permissions = $this->permissionCategoryService->with(['permissions'])->paginate(4);
+      return response()->json([
+        'categories' => $permissions
+      ]);
+    endif;
+
+    return view('settings.roles.create');
   }
 
   /**
@@ -53,12 +60,18 @@ class RoleController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(Role $role, PermissionCategoryDataTable $dataTable)
+  public function edit(Role $role, Request $request)
   {
-    return $dataTable->setRole($role)->render('settings.roles.edit', [
-      'role' => $role,
-      'rolePermissions' => $this->roleService->roleHasPermissions($role->id),
-    ]);
+    if ($request->ajax()) :
+      $roleHasPermission = $this->roleService->roleHasPermissions($role->id);
+      $permissions = $this->permissionCategoryService->with(['permissions'])->paginate(4);
+      return response()->json([
+        'categories' => $permissions,
+        'roles' => $roleHasPermission,
+      ]);
+    endif;
+
+    return view('settings.roles.edit', compact('role'));
   }
 
   /**

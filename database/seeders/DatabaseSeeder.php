@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
       ParticipantSeeder::class,
       ProgramSeeder::class,
       ScheduleSeeder::class,
+      BankSeeder::class,
     ]);
   }
 }

@@ -2,20 +2,17 @@
 
 namespace App\Services\User;
 
-use App\Helpers\Enum\StatusUserType;
-use App\Helpers\Global\Helper;
-use App\Helpers\Global\Upload;
-use App\Repositories\Participant\ParticipantRepository;
 use Exception;
-use Illuminate\Http\Request;
 use InvalidArgumentException;
+use App\Helpers\Enum\StatusActiveType;
+use App\Helpers\Global\Helper;
 use Illuminate\Support\Facades\DB;
 use LaravelEasyRepository\Service;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Repositories\Role\RoleRepository;
 use App\Repositories\User\UserRepository;
+use App\Repositories\Participant\ParticipantRepository;
 
 class UserServiceImplement extends Service implements UserService
 {
@@ -60,7 +57,7 @@ class UserServiceImplement extends Service implements UserService
       $validated['name'] = "{$validated['first_name']} {$validated['last_name']}";
       $validated['avatar'] = $avatar;
       $validated['password'] = $request->input('password') ? Hash::make($request->password) : Hash::make(Helper::DEFAULT_PASSWORD);
-      $validated['status'] = StatusUserType::ACTIVE->value;
+      $validated['status'] = StatusActiveType::ACTIVE->value;
 
       // Masukkan Data tersebut ke table users
       $user = $this->mainRepository->create($validated);
@@ -106,7 +103,7 @@ class UserServiceImplement extends Service implements UserService
       $validation = $request->validated();
       $validation['avatar'] = $avatar;
       $validation['password'] = Hash::make(Helper::DEFAULT_PASSWORD);
-      $validation['status'] = StatusUserType::ACTIVE->value;
+      $validation['status'] = StatusActiveType::ACTIVE->value;
 
       # Sync user to role
       $user = $this->mainRepository->create($validation);
